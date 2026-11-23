@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+
+# ROS
+build/
+devel/
+install/
+log/
+logs/
+
+# Data
+*.bag
+*.db3
+*.mcap
+*.pt
+*.pth
+*.onnx
+
+# Credentials
+*.pem
+*.key
+*.p12
+secrets/
+credentials/
+
+# macOS
+.DS_Store
+/yolov8_ros/yolov8_ros/ultralytics/
+*.zip
+*.swp
+.DS_Store
+
+
+# Local deployment files and draft copies
+/bringup_c12_precise_drop.launch
+/ugv_uav_coop/
+/qgc_cmd_recv/
+/rc_gimbal_bridge-main/launch/rc_dual_stream_with_gimbal.launch
+/yolov8_ros/yolov8_ros/scripts/1111yolo_v8.py
+/yolov8_ros/yolov8_ros/scripts/yolo_v8（复件）.py
+/yolov8_ros/yolov8_ros/launch/yolo_v8（复件）.launch
+/yolov8_ros/yolov8_ros/media/image.png

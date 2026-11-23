@@ -1,0 +1,43 @@
+<launch>
+  <arg name="camera_ip" default="127.0.0.1"/>
+  <node pkg="rc_gimbal_bridge" type="rc_to_udp_gimbal.py" name="rc_to_udp_gimbal" output="screen">
+    <param name="camera_ip" value="$(arg camera_ip)"/>
+    <param name="port" value="5000"/>
+    <!-- The left dial on CH14 controls yaw. The right dial on CH11 controls pitch. -->
+    <param name="ch_yaw" value="14"/>
+    <param name="ch_pitch" value="11"/>
+
+    <!-- RC endpoints, center, and deadband in microseconds. Values within the deadband produce no motion. -->
+    <param name="pwm_min_yaw" value="1050"/>
+    <param name="pwm_max_yaw" value="1950"/>
+    <param name="center_yaw" value="1500"/>
+    <param name="deadband_yaw" value="80"/>
+
+    <param name="pwm_min_pitch" value="1050"/>
+    <param name="pwm_max_pitch" value="1950"/>
+    <param name="center_pitch" value="1500"/>
+    <param name="deadband_pitch" value="80"/>
+
+    <!-- Speed limits and update rate. -->
+    <param name="max_yaw" value="100"/>
+    <param name="max_pitch" value="100"/>
+    <param name="repeat_hz" value="15"/>
+
+    <!-- Available modes are deadband_speed, speed, and position. -->
+    <param name="control_mode" value="deadband_speed"/>
+
+    <!-- These optional parameters apply in position mode. -->
+    <param name="yaw_min_deg" value="-90"/>
+    <param name="yaw_max_deg" value="90"/>
+    <param name="pitch_min_deg" value="-30"/>
+    <param name="pitch_max_deg" value="30"/>
+    <param name="kp_yaw" value="1.0"/>
+    <param name="kp_pitch" value="1.0"/>
+    <param name="speed_scale_yaw" value="0.8"/>
+    <param name="speed_scale_pitch" value="0.8"/>
+
+    <!-- Set the corresponding inversion flag to true to reverse an axis. -->
+    <rosparam param="invert_yaw">false</rosparam>
+    <rosparam param="invert_pitch">true</rosparam>
+  </node>
+</launch>

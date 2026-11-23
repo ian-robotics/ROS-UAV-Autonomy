@@ -1,0 +1,26 @@
+<launch>
+  <!-- Configure the two RTSP input sources. -->
+  <arg name="rgb_url" default="rtsp://127.0.0.1:554/stream=1"/>
+  <arg name="thermal_url" default="rtsp://127.0.0.1:555/stream=2"/>
+
+  <!-- Use low-latency RTSP over TCP, consistent with ffplay. -->
+  <arg name="backend" default="ffmpeg"/>
+  <arg name="rtsp_transport" default="tcp"/>
+  <arg name="timeout_ms" default="5000"/>
+  <arg name="ffmpeg_low_latency" default="true"/>
+  <arg name="ffmpeg_capture_options" default=""/>
+
+  <!-- Publish both RTSP inputs on RGB and thermal ROS image topics. -->
+  <include file="$(find rc_gimbal_bridge)/launch/rtsp_dual_camera_relay.launch">
+    <arg name="rgb_url" value="$(arg rgb_url)"/>
+    <arg name="thermal_url" value="$(arg thermal_url)"/>
+    <arg name="backend" value="$(arg backend)"/>
+    <arg name="rtsp_transport" value="$(arg rtsp_transport)"/>
+    <arg name="timeout_ms" value="$(arg timeout_ms)"/>
+    <arg name="ffmpeg_low_latency" value="$(arg ffmpeg_low_latency)"/>
+    <arg name="ffmpeg_capture_options" value="$(arg ffmpeg_capture_options)"/>
+  </include>
+
+  <!-- Serve the RGB and thermal ROS image topics over RTSP on port 8554. -->
+  <include file="$(find rc_gimbal_bridge)/launch/rtsp_topics_server.launch"/>
+</launch>

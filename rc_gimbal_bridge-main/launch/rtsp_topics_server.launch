@@ -1,0 +1,7 @@
+<launch>
+  <!-- Serve the RGB and thermal ROS image topics over the local RTSP server on port 8554. -->
+  <node pkg="rc_gimbal_bridge" type="rtsp_image_server.py" name="rtsp_image_server" output="screen">
+    <!-- Load private parameters so the node can read the stream and port settings. -->
+    <rosparam file="$(find rc_gimbal_bridge)/config/rtsp_topics.yaml" command="load"/>
+  </node>
+</launch>
